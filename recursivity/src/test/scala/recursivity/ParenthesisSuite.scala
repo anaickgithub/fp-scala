@@ -24,5 +24,13 @@ class ParenthesisSuite extends FlatSpec with Matchers {
   it should "be smarter than counting" in {
     balance("(()))(()".toList) shouldBe false
   }
+  
+  it should "check empty string" in {
+    balance("".toList) shouldBe true
+  }
+  
+  it should "check string without parenthesis" in {
+    balance("zazazaz".toList) shouldBe true
+  }
 
 }
