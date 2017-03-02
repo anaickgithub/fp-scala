@@ -23,34 +23,44 @@ object FunSets {
    */
   def singleElementSet(elem: Int): FunSet =
     //TODO : singleton set
+    //def fonction(x:Int):Boolean={x==elem}fonction
     x => x == elem;
+
   /**
    * Returns the union of the two given sets,
    * the sets of all elements that are in either `s` or `t`.
    */
-  def union(s: FunSet, t: FunSet): FunSet =
-    ??? //TODO : union
+  def union(s: FunSet, t: FunSet): FunSet = /*{
+    //TODO : union
+    def fonction(x: Int): Boolean = {
+      contains(s, x) || contains(t, x)
+    }
+    fonction
+  }*/
+    x => contains(s, x) || contains(t, x)
 
   /**
    * Returns the intersection of the two given sets,
    * the set of all elements that are both in `s` or `t`.
    */
   def intersect(s: FunSet, t: FunSet): FunSet =
-    ??? // TODO : interesection between 2 sets
+    // TODO : interesection between 2 sets
+    x => contains(s, x) && contains(t, x)
 
   /**
    * Returns the difference of the two given sets,
    * the set of all elements of `s` that are not in `t`.
    */
   def diff(s: FunSet, t: FunSet): FunSet =
-    ??? // TODO : difference between 2 sets
+    // TODO : difference between 2 sets
+    x => contains(s, x) && !contains(t, x)
 
   /**
    * Returns the subset of `s` for which `p` holds.
    */
   def filter(s: FunSet, p: Int => Boolean): FunSet =
-    ??? //TODO : return a new set in which only elements verifying the predicate are kept
-
+    //TODO : return a new set in which only elements verifying the predicate are kept
+    x => if (contains(s, x)) p(x) else false
   /**
    * The bounds for `forall` and `exists` are +/- 1000.
    */

@@ -1,4 +1,4 @@
-In this assignment, you will work with a functional representation of Sets based on the mathematical notion of characteristic functions. The goal is to gain practice with higher-order functions.
+﻿In this assignment, you will work with a functional representation of Sets based on the mathematical notion of characteristic functions. The goal is to gain practice with higher-order functions.
 
 You will write your solutions by completing the stubs in the `FunSets.scala` file.
 
@@ -51,6 +51,8 @@ Let’s start by implementing basic functions on FunSets.
 3.  Define the function `filter` which selects only the elements of a FunSet that are accepted by a given predicate `p`. The filtered elements are returned as a new FunSet. The signature of `filter` is as follows:
 
         def filter(s: FunSet, p: Int => Boolean): FunSet
+
+///////////////////////////////// Il n'existe pas de x tel que p est faux ////////////////////////////////////
 
 ## 2.2 Queries and Transformations on FunSets
 
