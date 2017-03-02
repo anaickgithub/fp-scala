@@ -22,8 +22,8 @@ object FunSets {
    * Returns the set of the one given element.
    */
   def singleElementSet(elem: Int): FunSet =
-    ??? //TODO : singleton set
-
+    //TODO : singleton set
+    x => x == elem;
   /**
    * Returns the union of the two given sets,
    * the sets of all elements that are in either `s` or `t`.
