@@ -1,6 +1,7 @@
 package funsets
 
 import scala.annotation.tailrec
+import scala.collection.mutable.ListBuffer
 
 /**
  * 2. Purely Functional Sets.
@@ -60,7 +61,7 @@ object FunSets {
    */
   def filter(s: FunSet, p: Int => Boolean): FunSet =
     //TODO : return a new set in which only elements verifying the predicate are kept
-    x => if (contains(s, x)) p(x) else false
+    x => if (contains(s, x)) contains(p, x) else false
   /**
    * The bounds for `forall` and `exists` are +/- 1000.
    */
@@ -71,11 +72,11 @@ object FunSets {
    */
   def forall(s: FunSet, p: Int => Boolean): Boolean = {
     def iter(a: Int): Boolean = {
-      if (???) ???
-      else if (???) ???
-      else iter(???)
+      if (a > bound) true
+      else if (contains(s, a) && !contains(p, a)) false
+      else iter(a + 1)
     }
-    iter(???)
+    iter(-bound)
   }
   //TODO: forall : check if all integers verify the predicate
 
@@ -84,19 +85,28 @@ object FunSets {
    * that satisfies `p`.
    */
   def exists(s: FunSet, p: Int => Boolean): Boolean =
-    ??? //TODO: check if at least an integer verifies the predicate
+    //TODO: check if at least an integer verifies the predicate
+    if (forall(s, x => !contains(p, x))) false else true
 
   /**
    * Returns a set transformed by applying `f` to each element of `s`.
    */
   def map(s: FunSet, f: Int => Int): FunSet =
-    ??? //TODO : transform into a new set
+    //TODO : transform into a new set
+    a => exists(s, x => a == f(x))
 
   def toSet(ints: List[Int]): FunSet =
     ??? //TODO : (optional) convert a list to Set
 
-  def toList(set: FunSet): List[Int] =
-    ??? //TODO : (optional) convert a Set to a List
+  def toList(set: FunSet): List[Int] = {
+    //TODO : (optional) convert a Set to a List
+    def iter(a: Int): ListBuffer[Int] = {
+      if (a > bound) ListBuffer()
+      else if (set(a)) iter(a + 1) :+ a
+      else iter(a + 1)
+    }
+    iter(-bound).toList
+  }
 
   /**
    * Displays the contents of a set

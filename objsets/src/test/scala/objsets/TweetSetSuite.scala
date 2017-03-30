@@ -41,6 +41,12 @@ class TweetSetSuite extends FunSuite {
     }
   }
 
+  test("filter: d body on set5") {
+    new TestSets {
+      assert(size(set5.filter(tw => tw.text == "d body")) === 1)
+    }
+  }
+
   test("union: set4c and set4d") {
     new TestSets {
       assert(size(set4c.union(set4d)) === 4)
@@ -59,11 +65,49 @@ class TweetSetSuite extends FunSuite {
     }
   }
 
+  test("union: between too empty set") {
+    new TestSets {
+      assert(size(set1.union(set1)) === 0)
+    }
+  }
+
+  test("union: between the same too not empty set") {
+    new TestSets {
+      assert(size(set5.union(set5)) === 4)
+    }
+  }
+
   test("ascending: set5") {
     new TestSets {
       val trends = set5.ascendingByRetweet
       assert(!trends.isEmpty)
       assert(trends.head.user === "c")
+      assert(trends.head.text === "c body")
+      assert(trends.head.retweets === 7)
+      assert(trends.tail.head.user === "d")
+      assert(trends.tail.tail.head.user === "a")
+      assert(trends.tail.tail.head.retweets === 20)
+      assert(trends.tail.tail.tail.head.user === "b")
+    }
+  }
+
+  test("ascending: set4d") {
+    new TestSets {
+      val trends = set4d.ascendingByRetweet
+      assert(!trends.isEmpty)
+      assert(trends.head.user === "d")
+      assert(trends.head.text === "d body")
+      assert(trends.head.retweets === 9)
+      assert(trends.tail.head.user === "a")
+      assert(trends.tail.head.retweets === 20)
+      assert(trends.tail.tail.head.user === "b")
+    }
+  }
+
+  test("ascending: set1") {
+    new TestSets {
+      val trends = set1.ascendingByRetweet
+      assert(trends.isEmpty)
     }
   }
 }
